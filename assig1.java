@@ -60,9 +60,133 @@ public class assig1
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-		System.out.println("Time for the password");
+		System.out.println("Are there any words you would like to pass me?");
+
+		String password = "shazam 2000";
+
+		String customerPassword = inScan.nextLine();
+
+		//System.out.println(customerPassword);
+
+		boolean specialCustomer = false;
+
+//		int passwordCount = 0;
+
+/////////////////////////////////////////////////
+///////// ***** SUPER HACKED ******* ////////////
+/////////////////////////////////////////////////		
+/////////// COME BACK AND FIX THIS //////////////
+/////////////////////////////////////////////////
+/// i don't think the for loop is doing anything 
+// 	and because there are only 2 checks, an if
+// followed by and else with a nested if is basically 
+// the 2 checks... couldn't adjust the number if we 
+// wanted to change to 3 checks or 4 easily so thats
+// why i'm not happy with this yet		
+
+		for (int i = 0; i<2; i++){
+			if (customerPassword.equals(password))
+			{
+				System.out.println("You entered " + customerPassword + " which is correct!");			
+				specialCustomer = true;
+				break;
+
+			}
+			else {
+				System.out.println("Try again, you did not say the right password");
+				i++;
+				customerPassword = inScan.nextLine();
+					if (customerPassword.equals(password))
+					{
+						System.out.println("You entered " + customerPassword + " which is correct!");			
+						specialCustomer = true;
+					}
+			}
+		}
+
+// checks to make sure outcome of special customer is correct
+
+	System.out.println("You made it outside the check " + customerPassword + " is " + specialCustomer);
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////// leaving the work i was playing with before settling on above hack ////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		//while(passwordCount<1) {
+
+		//	if (!customerPassword.equals(password))
+		//	{
+		//		System.out.println("Try again, you did not say the right password");
+		//		passwordCount++;
+		//		customerPassword = inScan.nextLine();
+		//	}
+
+		//	else {
+
+		//		System.out.println("You entered " + customerPassword + " which is correct!");			
+		//		specialCustomer = true;
+		//		passwordCount = 3;
+		//	}
+		//}
+		
+
+//		System.out.println("You made it outside the check " + customerPassword + " is " + specialCustomer);
+
+		//while (!customerPassword.equals(password) && passwordCount<3){
+		//boolean passwordDone = false;
+
+		//while (passwordDone){
+
+		//	System.out.println("Try again, you did not say the right password");
+		//	passwordCount++;
+		//	customerPassword = inScan.nextLine();
+		//	System.out.println(passwordCount);
+		//	if (passwordCount==2){
+		//		passwordDone = true;
+		//	}	
+		//	if(customerPassword.equals(password)){
+//
+//			System.out.println("You entered " + customerPassword + " which is correct!");			
+
+//			}
+
+			
+
+			//if (customerPassword.equals(password)){
+//			System.out.println("You entered " + customerPassword + " which is correct!");			
+//			//}
+//			else{
+				
+//				System.out.println("Try again, you did not say the right password");
+//				passwordCount++;
+//				customerPassword = inScan.nextLine();
+//				System.out.println(passwordCount);
+
+//				}
+								
+//				if (passwordCount >=1){
+//					specialCustomer = false;
+//				}
+//				else {
+//					specialCustomer = true;
+//				}
+			
+/////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
+///////////// QUESTION 3 /////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+		}
+	
+	
+
+
+
 	
 	}
-
-}
 
