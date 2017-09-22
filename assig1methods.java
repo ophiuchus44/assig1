@@ -126,18 +126,18 @@ public class assig1methods
 			{
 				case 1:
 					//System.out.println("You pressesed option 1");
-					updatePins();
+					updatePins(special);
 
 					// method for displaying the total at all times??
-					//dispalyTotal();
+					//dispalyTotal(special);
 					break;
 				case 2:
 					//System.out.println("You pressesed option 2");
-					updateQuaffles();
+					updateQuaffles(special);
 					break;
 				case 3:
 					//System.out.println("You pressesed option 3");
-					updateBroomstick();
+					updateBroomstick(special);
 					break;
 				case 4:
 					//System.out.println("You pressesed option 4");
@@ -280,7 +280,7 @@ public class assig1methods
 /////////// method for question 3 - price list
 /////////////////////////////////////////////////////////////////////////	
 /////////////////////////////////////////////////////////////////////////
-	public static int updatePins(){
+	public static int updatePins(boolean special){
 		System.out.println("For which team would you like to order pins?");
 
 		int menuChoice=0;
@@ -329,6 +329,8 @@ public class assig1methods
 					// if i wanted to 
 					add2Total(menuCategory,option1,order1);
 					add2StoreTotal(menuCategory,option1,order1);
+
+					dispalyTotal(special);
 					break;
 				case 2:
 					System.out.println("How many Slytherin pins would you like?");
@@ -336,6 +338,8 @@ public class assig1methods
 					int option2 = 2;
 					add2Total(menuCategory,option2,order2);
 					add2StoreTotal(menuCategory,option2,order2);
+					dispalyTotal(special);
+
 					break;
 				case 3:
 					System.out.println("How many Hufflepuff pins would you like?");
@@ -343,6 +347,8 @@ public class assig1methods
 					int option3 = 3;
 					add2Total(menuCategory,option3,order3);
 					add2StoreTotal(menuCategory,option3,order3);
+					dispalyTotal(special);
+
 					break;
 				case 4:
 					System.out.println("How many Slytherin pins would you like?");
@@ -350,9 +356,13 @@ public class assig1methods
 					int option4 = 4;
 					add2Total(menuCategory,option4,order4);
 					add2StoreTotal(menuCategory,option4,order4);
+					dispalyTotal(special);
+
 					break;
 				case 5:
-					System.out.println("You pressesed option 5... good bye!");
+					System.out.println("Back to Main Menu!");
+					dispalyTotal(special);
+
 					break;
 			}
 
@@ -364,7 +374,7 @@ public class assig1methods
 
 
 
-	public static int updateQuaffles(){
+	public static int updateQuaffles(boolean special){
 		//System.out.println("How many Quaffles would you like?");
 
 		int menuChoice=0;
@@ -403,6 +413,9 @@ public class assig1methods
 					int option1 = 1; 
 					add2Total(menuCategory,option1,order1);
 					add2StoreTotal(menuCategory,option1,order1);
+					dispalyTotal(special);
+
+
 					break;
 				
 			}
@@ -412,7 +425,7 @@ public class assig1methods
 		return menuCategory;
 	}
 
-public static int updateBroomstick(){
+public static int updateBroomstick(boolean special){
 		//System.out.println("How many Quaffles would you like?");
 
 		int menuChoice=0;
@@ -431,15 +444,12 @@ public static int updateBroomstick(){
 			System.out.println("1) Order Broomstick");
 			System.out.println("2) Return to Main Menu");
 
+
 //////////////////////////////////////////////////////////////////////
 			// why doesn't inScan inherit from main? .... hmmm
 			Scanner inScan = new Scanner(System.in);
 
 			menuChoice = inScan.nextInt();
-
-
-
-
 
 ////////////////////////////////////////////////////////////////////////
 			switch(menuChoice)
@@ -451,6 +461,8 @@ public static int updateBroomstick(){
 					int option1 = 1; 
 					add2Total(menuCategory,option1,order1);
 					add2StoreTotal(menuCategory,option1,order1);
+					dispalyTotal(special);
+
 					break;
 				
 			}
@@ -713,13 +725,13 @@ public static int updateBroomstick(){
 
 /////
 
-	public static void dispalyTotal()throws IOException{
+	public static void dispalyTotal(boolean special){
 
 		
 
 		//String fileLocation = "customerBill.txt";
 
-
+	try{
 		FileReader fr = new FileReader("customerBill.txt");
 		BufferedReader br = new BufferedReader(fr);
 		//BufferedReader br = new BufferedReader(new FileReader("customerBill.txt"));
@@ -730,9 +742,14 @@ public static int updateBroomstick(){
 			System.out.println(line);
 //		}
 		fr.close();
-		
 		}
 	}
+	catch (IOException e){
+		e.printStackTrace();
+	}
+		
+}
+
 
 	
 
