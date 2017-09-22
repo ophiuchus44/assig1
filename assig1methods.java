@@ -45,11 +45,10 @@ public class assig1methods
 ///////////////////////////////////////////////////////////////////////////////////
 // if customer response is invalid, customer is not ready2go and we exit program //
 ///////////////////////////////////////////////////////////////////////////////////	
-	while (!ready2go){
-		System.out.println("I'm going on my break :) ");
+	while (ready2go){
+//		System.out.println("I'm going on my break :) ");
 		//exits program if customer is not ready
-		return;
-	}
+//		return;
 
 
 /////////////////////////////////////////////////////////////////////////	
@@ -120,7 +119,11 @@ public class assig1methods
 			System.out.println("4) Show Price List");
 			System.out.println("5) Check Out");
 
-			menuChoice = inScan.nextInt();
+			//menuChoice = inScan.nextLine();
+
+			String temp = inScan.nextLine();
+			menuChoice = Integer.parseInt(temp);
+
 
 			switch(menuChoice)
 			{
@@ -145,8 +148,11 @@ public class assig1methods
 					break;
 				case 5:
 					System.out.println("You pressesed option 5... good bye!");
+
 					break;
 			}
+
+
 
 		} while (menuChoice != 5);
 
@@ -160,11 +166,49 @@ public class assig1methods
 		System.out.println("* 17 Sickles == 1 Galleon == 493 Knuts *");
 		System.out.println("****************************************");
 
-		// print receipt/ displayTotal
+
+
+	
+
+		System.out.println("I can help the next person in line. Is there another customer? \n[say: yes, or ya, or ok, or si, or y, or ya dude, or 1]");
+
+
+		customerQuestion = inScan.nextLine();
+
+		//boolean ready2go;
+		// initialize method customerReady, pass the argument customerQuestion
+		// and set to variable ready2go with boolean result 
+
+		ready2go = customerReady(customerQuestion);
+		System.out.println(ready2go);
+
+
+
+
+
+	}
+
+
+
+		System.out.println("I'm going on my break :) ");
+		//exits program if customer is not ready
+		
 
 
 
 		deleteData();
+
+		return;
+
+
+
+
+
+		// print receipt/ displayTotal
+
+
+
+		//deleteData();
 
 		// if 5 is pressed currently exits... but needs to be included in 
 		// larger loop that checks for customer first 
@@ -739,10 +783,20 @@ public static int updateBroomstick(boolean special){
 
 		String line;
 		while ((line = br.readLine()) != null){
+////////////////////////////////////////////////////////////////////////////////////			
+////////////////////////////////////////////////////////////////////////////////////			
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+		// instead of printing, need to manipulate based on special	
 			System.out.println(line);
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////			
 //		}
-		fr.close();
+		
 		}
+		fr.close();
 	}
 	catch (IOException e){
 		e.printStackTrace();
