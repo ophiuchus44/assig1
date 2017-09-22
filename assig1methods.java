@@ -1,8 +1,12 @@
 import java.util.Scanner;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
-
+import java.io.RandomAccessFile;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,7 +19,7 @@ public class assig1methods
 	{
 
 	Scanner inScan = new Scanner(System.in);
-	System.out.println("I can help the next person in line. Is there another customer? \n[say yes, or ya, or ok, or si, or y, or ya dude, or 1]");
+	System.out.println("I can help the next person in line. Is there another customer? \n[say: yes, or ya, or ok, or si, or y, or ya dude, or 1]");
 
 
 /////////////////////////////////////////////////////////////////////////	
@@ -38,8 +42,9 @@ public class assig1methods
 	System.out.println(ready2go);
 
 
-
-// if customer response is invalid, customer is not ready2go and we exit program
+///////////////////////////////////////////////////////////////////////////////////
+// if customer response is invalid, customer is not ready2go and we exit program //
+///////////////////////////////////////////////////////////////////////////////////	
 	while (!ready2go){
 		System.out.println("I'm going on my break :) ");
 		//exits program if customer is not ready
@@ -88,14 +93,14 @@ public class assig1methods
 /////////////////////////////////////////////////////////////////////////
 
 
-	int totalCount_Pin_Gryffindor;
-	int totalCount_Pin_Slytherin;
-	int totalCount_Pin_Hufflepuff;
-	int totalCount_Pin_Ravenclaw;
+//	int totalCount_Pin_Gryffindor;
+///	int totalCount_Pin_Slytherin;
+//	int totalCount_Pin_Hufflepuff;
+//	int totalCount_Pin_Ravenclaw;
 	
-	int totalCount_Quaffles;
+//	int totalCount_Quaffles;
 
-	int totalCount_Brooms;
+//	int totalCount_Brooms;
 /////////////////////////////////////////
 	//update totals with orders???
 	// append to list or just update count
@@ -122,6 +127,9 @@ public class assig1methods
 				case 1:
 					//System.out.println("You pressesed option 1");
 					updatePins();
+
+					// method for displaying the total at all times??
+					//dispalyTotal();
 					break;
 				case 2:
 					//System.out.println("You pressesed option 2");
@@ -133,6 +141,7 @@ public class assig1methods
 					break;
 				case 4:
 					//System.out.println("You pressesed option 4");
+					displayPrices(special);
 					break;
 				case 5:
 					System.out.println("You pressesed option 5... good bye!");
@@ -140,6 +149,20 @@ public class assig1methods
 			}
 
 		} while (menuChoice != 5);
+
+
+		// method for giving receipt
+
+		System.out.println("****************************************");
+		System.out.println("* Note 1: We Appreciate Exact change!  *");
+		System.out.println("* Note 2: Recall our currency options: *");
+		System.out.println("*        29 Knuts == 1 Sickle          *");
+		System.out.println("* 17 Sickles == 1 Galleon == 493 Knuts *");
+		System.out.println("****************************************");
+
+		// print receipt/ displayTotal
+
+
 
 		deleteData();
 
@@ -198,28 +221,37 @@ public class assig1methods
 			}
 		}
 
+		return ready;
+
+	}
+
+//		if (!ready){
+//			ready = false;
+//		}
+
+
 
 		// now we check if customer is ready
-		if (ready){
+//		if (ready){
 				//this was a check to make sure it is working properly
-				System.out.println("We almost made it outside the first check!");
-			}
-		else{
+//				System.out.println("We almost made it outside the first check!");
+//			}
+//		else{
 
 			// If the customerReady = false then we exit the program
 			// this means the response given in the previous for loop
 			// was not found in the validresponse list
 			// *** note: add time delay so if no response is given within certain amount of time exit
-			System.out.println("I'm going on my break ;)");
+		//	System.out.println("I'm going on my break ;)");
 			
-			ready = false;
-		}
+//			ready = false;
+//		}
 	
 		// this checked that the valid response was given and we did not exit the program
-		System.out.println("We made it outside the first check!");
+	//	System.out.println("We made it outside the first check!");
 
-		return ready;
-	}
+//		return ready;
+//	}
 
 /////////////////////////////////////////////////////////////////////////	
 /////////////////////////////////////////////////////////////////////////
@@ -296,24 +328,28 @@ public class assig1methods
 					// but i still want to write to csv for now so i could do it 
 					// if i wanted to 
 					add2Total(menuCategory,option1,order1);
+					add2StoreTotal(menuCategory,option1,order1);
 					break;
 				case 2:
 					System.out.println("How many Slytherin pins would you like?");
 					int order2 = inScan.nextInt();
 					int option2 = 2;
 					add2Total(menuCategory,option2,order2);
+					add2StoreTotal(menuCategory,option2,order2);
 					break;
 				case 3:
 					System.out.println("How many Hufflepuff pins would you like?");
 					int order3 = inScan.nextInt();
 					int option3 = 3;
 					add2Total(menuCategory,option3,order3);
+					add2StoreTotal(menuCategory,option3,order3);
 					break;
 				case 4:
 					System.out.println("How many Slytherin pins would you like?");
 					int order4 = inScan.nextInt();
 					int option4 = 4;
 					add2Total(menuCategory,option4,order4);
+					add2StoreTotal(menuCategory,option4,order4);
 					break;
 				case 5:
 					System.out.println("You pressesed option 5... good bye!");
@@ -366,6 +402,7 @@ public class assig1methods
 					// for tracking data later on
 					int option1 = 1; 
 					add2Total(menuCategory,option1,order1);
+					add2StoreTotal(menuCategory,option1,order1);
 					break;
 				
 			}
@@ -413,6 +450,7 @@ public static int updateBroomstick(){
 					// for tracking data later on
 					int option1 = 1; 
 					add2Total(menuCategory,option1,order1);
+					add2StoreTotal(menuCategory,option1,order1);
 					break;
 				
 			}
@@ -422,19 +460,134 @@ public static int updateBroomstick(){
 		return menuCategory;
 	}
 
+	public static void displayPrices(boolean special){
+		//System.out.println("How many Quaffles would you like?");
 
+		int menuChoice=0;
+
+	if(special){
+	do
+		{
+			System.out.println("1) Display Prices");
+			System.out.println("2) Return to Main Menu");
+
+//////////////////////////////////////////////////////////////////////
+			// why doesn't inScan inherit from main? .... hmmm
+			Scanner inScan = new Scanner(System.in);
+
+			menuChoice = inScan.nextInt();
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////
+			switch(menuChoice)
+			{
+				case 1:
+					System.out.println("*****************************************************************************************************");
+					System.out.println("Overall, 10% off over and above any other discounts if the overall order (after other discounts) " + 
+						"is 3 Galleons or more, rounded to the nearest Knut");
+					System.out.println("*****************************************************************************************************");
+					System.out.println("House Pins (each):  			20 Knuts");
+					System.out.println("if 10 or more purchase:    		18 Knuts");
+					System.out.println("Quaffles (each):       			145 Knuts");
+					System.out.println("Quaffles (box of 5):       		580 Knuts"); 
+					System.out.println("Broomstick Service Kits (each):	899 Knuts");
+
+					System.out.println("****************************************");
+					System.out.println("* Note 1: We Appreciate Exact change!  *");
+					System.out.println("* Note 2: Recall our currency options: *");
+					System.out.println("* 		29 Knuts == 1 Sickle   	       *");
+					System.out.println("* 17 Sickles == 1 Galleon == 493 Knuts *");
+					System.out.println("****************************************");
+					break;
+				
+			}
+
+		} while (menuChoice != 2);
+	}
+	else{
+		do
+		{
+			System.out.println("1) Display Prices");
+			System.out.println("2) Return to Main Menu");
+
+//////////////////////////////////////////////////////////////////////
+			// why doesn't inScan inherit from main? .... hmmm
+			Scanner inScan = new Scanner(System.in);
+
+			menuChoice = inScan.nextInt();
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////
+			switch(menuChoice)
+			{
+				case 1:
+					System.out.println("House Pins (each):  			20 Knuts");
+					System.out.println("Quaffles (each):       			145 Knuts");
+					System.out.println("Quaffles (box of 5):       		638 Knuts"); 
+					System.out.println("Broomstick Service Kits (each): 986 Knuts");
+
+					System.out.println("****************************************");
+					System.out.println("* Note 1: We Appreciate Exact change!  *");
+					System.out.println("* Note 2: Recall our currency options: *");
+					System.out.println("*        29 Knuts == 1 Sickle          *");
+					System.out.println("* 17 Sickles == 1 Galleon == 493 Knuts *");
+					System.out.println("****************************************");
+					break;
+				
+			}
+
+		} while (menuChoice != 2);
+	}
+
+
+
+
+		//return menuCategory;
+	}
+
+
+
+
+/// methods to do list
 // will have to write a method for reading from test.txt for calculating totals
 // displaying current totals, and for 'printing receipt'
 
 
 
+// should only need to pass isSpecial in
+//runningTotal(isSpecial)
+	//if special = true;
+	//	return savings
+	//else 
+		//return whatYouWouldHaveSaved
+
+//grab test.txt and covnvert to readable 
+//	coverter needed to take values from txt and put back into
+
+
+// no matter if true or false, it'll gt passed 
+// and return if the customer gets discount or not
+//finalBill(isSpecial)
 
 
 
+// payBill - something that after reading finalBill allows you to pay
 
 
+// savings for being special or vice versa, what you could have saved if not special
 
 
+// methods wish list
+
+// delete records (customer)
+	// prob don't need this because records are entered individually to a mster
+	// and if deleted, maybe give them a tag of some sort to keep track?? 
 
 
 
@@ -448,7 +601,7 @@ public static int updateBroomstick(){
 //////////// ********************************************** //////////////
 
 	public static void deleteData(){
-		String path = "test.txt";
+		String path = "customerBill.txt";
       try{
 
     		File file = new File(path);
@@ -488,7 +641,52 @@ public static int updateBroomstick(){
 		String orderString = Integer.toString(order);
 
 
-		String filePath = "test.txt";
+		String filePath = "customerBill.txt";
+
+		FileWriter fw = new FileWriter(filePath, true);
+
+		BufferedWriter bw = new BufferedWriter(fw);
+
+		PrintWriter pw = new PrintWriter(bw);
+
+// write to txt file
+		pw.println(categoryString + "," + optionString + "," + orderString);
+
+		pw.flush();
+		pw.close();
+
+		System.out.println("(Record Saved)");
+	}
+	catch(IOException e){
+		e.printStackTrace();
+	}
+
+
+
+	}
+
+
+/// method for adding to CSV file storeHistory of order data
+
+	public static void add2StoreTotal(int category, int option, int order){
+
+
+		//String total;
+		
+		//boolean done = false;
+		try{
+
+
+		System.out.println("Category_ID " + category + ", Option_ID " + option + ", Order_Amount " + order);
+
+
+		String categoryString = Integer.toString(category);
+		String optionString = Integer.toString(option);
+		String orderString = Integer.toString(order);
+
+		//String customerID 
+
+		String filePath = "storeHistory.txt";
 
 		FileWriter fw = new FileWriter(filePath, true);
 
@@ -511,6 +709,31 @@ public static int updateBroomstick(){
 
 	}
 
+
+
+/////
+
+	public static void dispalyTotal()throws IOException{
+
+		
+
+		//String fileLocation = "customerBill.txt";
+
+
+		FileReader fr = new FileReader("customerBill.txt");
+		BufferedReader br = new BufferedReader(fr);
+		//BufferedReader br = new BufferedReader(new FileReader("customerBill.txt"));
+//		String aLineFromFile = null;
+
+		String line;
+		while ((line = br.readLine()) != null){
+			System.out.println(line);
+//		}
+		fr.close();
+		
+		}
+	}
+
 	
 
 
@@ -529,4 +752,13 @@ public static int updateBroomstick(){
 /// public static void methodName = procedure
 /// public static boolean/int methodName = function
 	
+
+
+
+
+
+//////////// major problems
+//////// can't read data back in to do next step of conversions and payment
+/////// need to get info out of txt file....
+/////////
 
