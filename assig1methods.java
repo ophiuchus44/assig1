@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import javax.swing.JOptionPane;
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -74,7 +76,7 @@ public class assig1methods
 		special = specialCustomer(customerPassword);
 	}
 
-	System.out.println("You are special? " + special);
+	//System.out.println("You are special? " + special);
 
 	String customerType;
 	if(special){
@@ -124,6 +126,7 @@ public class assig1methods
 			String temp = inScan.nextLine();
 			menuChoice = Integer.parseInt(temp);
 
+			//displayTotal(special);
 
 			switch(menuChoice)
 			{
@@ -132,18 +135,21 @@ public class assig1methods
 					updatePins(special);
 
 					// method for displaying the total at all times??
-					//dispalyTotal(special);
+			//		dispalyTotal(special);
 					break;
 				case 2:
 					//System.out.println("You pressesed option 2");
 					updateQuaffles(special);
+					//displayTotal(special);
 					break;
 				case 3:
 					//System.out.println("You pressesed option 3");
 					updateBroomstick(special);
+					//displayTotal(special);
 					break;
 				case 4:
 					//System.out.println("You pressesed option 4");
+					//displayTotal(special);
 					displayPrices(special);
 					break;
 				case 5:
@@ -157,7 +163,8 @@ public class assig1methods
 		} while (menuChoice != 5);
 
 
-		// method for giving receipt
+		// CUSTOMER CHECKING OUT SECTION //
+		displayTotal(special);
 
 		System.out.println("****************************************");
 		System.out.println("* Note 1: We Appreciate Exact change!  *");
@@ -166,9 +173,20 @@ public class assig1methods
 		System.out.println("* 17 Sickles == 1 Galleon == 493 Knuts *");
 		System.out.println("****************************************");
 
-
+		// method for giving receipt
 
 	
+		// after customer checks out 
+
+
+
+
+
+		// DELETE OLD CUSTOMER DATA
+		
+		deleteData();
+
+		// NEXT CUSTOMER //
 
 		System.out.println("I can help the next person in line. Is there another customer? \n[say: yes, or ya, or ok, or si, or y, or ya dude, or 1]");
 
@@ -196,7 +214,6 @@ public class assig1methods
 
 
 
-		deleteData();
 
 		return;
 
@@ -374,7 +391,7 @@ public class assig1methods
 					add2Total(menuCategory,option1,order1);
 					add2StoreTotal(menuCategory,option1,order1);
 
-					dispalyTotal(special);
+					displayTotal(special);
 					break;
 				case 2:
 					System.out.println("How many Slytherin pins would you like?");
@@ -382,7 +399,7 @@ public class assig1methods
 					int option2 = 2;
 					add2Total(menuCategory,option2,order2);
 					add2StoreTotal(menuCategory,option2,order2);
-					dispalyTotal(special);
+					displayTotal(special);
 
 					break;
 				case 3:
@@ -391,21 +408,21 @@ public class assig1methods
 					int option3 = 3;
 					add2Total(menuCategory,option3,order3);
 					add2StoreTotal(menuCategory,option3,order3);
-					dispalyTotal(special);
+					displayTotal(special);
 
 					break;
 				case 4:
-					System.out.println("How many Slytherin pins would you like?");
+					System.out.println("How many Ravenclaw pins would you like?");
 					int order4 = inScan.nextInt();
 					int option4 = 4;
 					add2Total(menuCategory,option4,order4);
 					add2StoreTotal(menuCategory,option4,order4);
-					dispalyTotal(special);
+					displayTotal(special);
 
 					break;
 				case 5:
 					System.out.println("Back to Main Menu!");
-					dispalyTotal(special);
+					displayTotal(special);
 
 					break;
 			}
@@ -457,8 +474,7 @@ public class assig1methods
 					int option1 = 1; 
 					add2Total(menuCategory,option1,order1);
 					add2StoreTotal(menuCategory,option1,order1);
-					dispalyTotal(special);
-
+					displayTotal(special);
 
 					break;
 				
@@ -505,7 +521,7 @@ public static int updateBroomstick(boolean special){
 					int option1 = 1; 
 					add2Total(menuCategory,option1,order1);
 					add2StoreTotal(menuCategory,option1,order1);
-					dispalyTotal(special);
+					displayTotal(special);
 
 					break;
 				
@@ -769,7 +785,7 @@ public static int updateBroomstick(boolean special){
 
 /////
 
-	public static void dispalyTotal(boolean special){
+	public static void displayTotal(boolean special){
 
 		
 
@@ -782,13 +798,67 @@ public static int updateBroomstick(boolean special){
 //		String aLineFromFile = null;
 
 		String line;
+
+		int pin1Total=0;
+		int pin2Total=0;
+		int pin3Total=0;
+		int pin4Total=0;
+		int quaffleTotal=0;
+		int broomTotal=0;
+
 		while ((line = br.readLine()) != null){
 ////////////////////////////////////////////////////////////////////////////////////			
 ////////////////////////////////////////////////////////////////////////////////////			
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
-		// instead of printing, need to manipulate based on special	
-			System.out.println(line);
+		// instead of printing, need to manipulate based on special
+
+		//	JOptionPane.showMessageDialog(null, line);
+
+			//method for converting txt to bill
+			//System.out.println(line);
+
+
+
+			// store future values of orders in here
+
+			String category = convertCategory(line);
+			String orderAmount = convertOrderAmount(line);
+
+			int orderInt = Integer.parseInt(orderAmount);
+
+
+
+			if(category.equals("Gryffindor Pin(s): ")){
+				pin1Total += orderInt;
+			}
+			else if(category.equals("Slytherin Pin(s): ")){
+				pin2Total += orderInt;
+			}
+			else if(category.equals("Hufflepuff Pin(s): ")){
+				pin3Total += orderInt;
+			}
+			else if(category.equals("Ravenclaw Pin(s): ")){
+				pin4Total += orderInt;
+			}
+			else if(category.equals("Quaffle(s): ")){
+				quaffleTotal += orderInt;
+			}
+			else if(category.equals("Broomstick Kit(s): ")){
+				broomTotal += orderInt;
+			}
+
+			//System.out.println(category + orderAmount);
+
+			//System.out.println(category + pin1Total);
+//			System.out.println("Gryffindor Pin(s): " + pin1Total);
+//			System.out.println("Slytherin Pin(s): " + pin2Total);
+//			System.out.println("Hufflepuff Pin(s): " + pin3Total);
+//			System.out.println("Ravenclaw Pin(s): " + pin4Total);
+
+			//System.out.printf(orderAmount);
+
+
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
@@ -796,6 +866,33 @@ public static int updateBroomstick(boolean special){
 //		}
 		
 		}
+		// only display if orders made
+
+			System.out.println("**************************************");
+			if(pin1Total>0){
+
+				// method that totals up??
+				//totalDue(pin1Total);
+				System.out.println("Gryffindor Pin(s): " + pin1Total);	
+			}
+			if(pin2Total>0){
+				System.out.println("Slytherin Pin(s): " + pin2Total);	
+			}
+			if(pin3Total>0){
+				System.out.println("Hufflepuff Pin(s): " + pin3Total);
+			}
+			if(pin4Total>0){
+				System.out.println("Ravenclaw Pin(s): " + pin4Total);	
+			}
+			if(quaffleTotal>0){
+				System.out.println("Quaffle(s): " + quaffleTotal);	
+			}
+			if(broomTotal>0){
+				System.out.println("Brromstick Kit(s): " + broomTotal);	
+			}
+			
+			System.out.println("**************************************");
+
 		fr.close();
 	}
 	catch (IOException e){
@@ -806,6 +903,45 @@ public static int updateBroomstick(boolean special){
 
 
 	
+public static String convertCategory(String line){
+	
+	//String upToNCharacters = s.substring(0, Math.min(s.length(), 3));
+	String category = "";
+
+	String categoryIDs = line.substring(0,3);
+	
+	//String orderAmount = line.substring(3,7);
+
+
+	if(categoryIDs.equals("1,1")){
+		category = "Gryffindor Pin(s): ";
+	}
+	else if(categoryIDs.equals("1,2")){
+		category = "Slytherin Pin(s): ";
+	}
+	else if(categoryIDs.equals("1,3")){
+		category = "Hufflepuff Pin(s): ";
+	}
+	else if(categoryIDs.equals("1,4")){
+		category = "Ravenclaw Pin(s): ";
+	}
+	else if(categoryIDs.equals("2,1")){
+		category = "Quaffle(s): ";
+	}
+	else if(categoryIDs.equals("3,1")){
+		category = "Broomstick Kit(s): ";
+	}
+	
+	return category;
+}
+
+public static String convertOrderAmount(String line){
+	
+	String orderAmount = "";
+	// grabs all numbers passed 4th position up to lenght of string
+	orderAmount = line.substring(4,line.length());
+	return orderAmount;
+}
 
 
 		
