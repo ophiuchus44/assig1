@@ -29,12 +29,6 @@ public class assig1methods
 /////// question 1 	
 /////////////////////////////////////////////////////////////////////////	
 /////////////////////////////////////////////////////////////////////////
-
-
-/// Prob need a while loop to encapsolate all of main to check for !done
-/// to keep looping back to start of sequence of method calls
-
-
 	String customerQuestion = inScan.nextLine();
 
 	boolean ready2go;
@@ -133,23 +127,17 @@ public class assig1methods
 				case 1:
 					//System.out.println("You pressesed option 1");
 					updatePins(special);
-
-					// method for displaying the total at all times??
-			//		dispalyTotal(special);
 					break;
 				case 2:
 					//System.out.println("You pressesed option 2");
 					updateQuaffles(special);
-					//displayTotal(special);
 					break;
 				case 3:
 					//System.out.println("You pressesed option 3");
 					updateBroomstick(special);
-					//displayTotal(special);
 					break;
 				case 4:
 					//System.out.println("You pressesed option 4");
-					//displayTotal(special);
 					displayPrices(special);
 					break;
 				case 5:
@@ -164,24 +152,146 @@ public class assig1methods
 
 
 		// CUSTOMER CHECKING OUT SECTION //
-		displayTotal(special);
+		//displayTotal(special);
 
-		System.out.println("****************************************");
-		System.out.println("* Note 1: We Appreciate Exact change!  *");
-		System.out.println("* Note 2: Recall our currency options: *");
-		System.out.println("*        29 Knuts == 1 Sickle          *");
-		System.out.println("* 17 Sickles == 1 Galleon == 493 Knuts *");
-		System.out.println("****************************************");
-
-		// method for giving receipt
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
-		System.out.println("How would you like to pay? We accept Galleons, Sickles and Knuts");
+		// total in knuts 
+		// method for giving receipt
+		int customerTotal;
+
+		customerTotal = displayTotal(special);
+		//customerTotal = getTotal(special);
+
+		// need to get total out of method display Total
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// for funzies, playing with tricks
+	System.out.println("Your total comes to " + customerTotal + " Knuts." 
+		+ "\nHow would you like to pay?" 
+		+ "\nWe accept Galleons, Sickles and Knuts");
+
+	int menuChoice2=0;
+
+	boolean paid = false;
+
+	int knutsPaid = 0;
+	int sicklesPaid = 0;
+	int galleonsPaid = 0;
+	int totalPaid = 0;
+
+	do
+		{
+		
+			System.out.println("****************************************");
+			System.out.println("* Note 1: We Appreciate Exact change!  *");
+			System.out.println("* Note 2: Recall our currency options: *");
+			System.out.println("*        29 Knuts == 1 Sickle          *");
+			System.out.println("* 17 Sickles == 1 Galleon == 493 Knuts *");
+			System.out.println("****************************************");
+
+
+
+
+
+			System.out.println("1) Pay with Knut(s)");
+			System.out.println("2) Pay with Sickle(s)");
+			System.out.println("3) Pay with Galleon(s)");
+
+//			method(customerTotal,knutsPaid,sicklesPaid,galleonsPaid)
+
+			//menuChoice = inScan.nextLine();
+
+			String temp2 = inScan.nextLine();
+			menuChoice2 = Integer.parseInt(temp2);
+			
+			int knutsPaymentAmount=0;
+			int sicklesPaymentAmount=0;
+			int galleonPaymentAmount=0;
+			//displayTotal(special);
+
+			switch(menuChoice2)
+			{
+				case 1:
+
+					//int knutsPayment = 0;
+					System.out.println("Enter Knut(s) Amount: ");
+
+					String tempScan = inScan.nextLine();
+
+					knutsPaymentAmount = Integer.parseInt(tempScan);
+
+					knutsPaid+=knutsPaymentAmount;
+
+					//method for returning paid = true
+
+
+					totalPaid+=knutsPaid;
+					//System.out.println("Your Total Knuts Payment Amount is: "+ knutsPaid);
+					//updatePins(special);s
+					paid = false;
+					break;
+				case 2:
+					System.out.println("Enter Sickle(s) Amount: ");
+					String tempScan2 = inScan.nextLine();
+					sicklesPaymentAmount = Integer.parseInt(tempScan2);
+					sicklesPaid+=sicklesPaymentAmount;
+
+					// convert sickles to Knuts
+					knutsPaid = sicklesPaid*29;
+
+					totalPaid+=knutsPaid;
+					//System.out.println("Your Total Sickle(s) Payment Amount is: "+ sicklesPaid);
+					
+
+					paid = false;
+					break;
+				case 3:
+					System.out.println("Enter Galleon(s) Amount: ");
+					String tempScan3 = inScan.nextLine();
+					galleonPaymentAmount = Integer.parseInt(tempScan3);
+					galleonsPaid+=galleonPaymentAmount;
+
+					// convert galleons to knuts
+					knutsPaid = galleonsPaid*493;
+
+					totalPaid+=knutsPaid;
+					//System.out.println("Your Total Galleon(s) Payment Amount is: "+ galleonsPaid);
+
+
+					paid = true;
+					break;
+			}
+
+			System.out.println("Total Paid (in Knuts): " + totalPaid);
+
+
+
+			//System.out.println("Total Knut(s) Paid: " + knutsPaid);
+			//System.out.println("Total Sickle(s) Paid: " + sicklesPaid);
+			//System.out.println("Total Galleon(s) Paid: " + galleonsPaid);
+
+
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+//////////// this is where it will check if the total has been paid or not
+		//	if (totalDue=<totalPaid){
+		//		paid = true;
+		//	}
+
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+		} while (!paid);
+//		} while (menuChoice != 5);
+
+
+		System.out.println("You have paid in full.");
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -222,10 +332,32 @@ public class assig1methods
 
 		System.out.println("I'm going on my break :) ");
 		//exits program if customer is not ready
+
+
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+//////////////////// bonus? boss check sales section ///////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+
 		
+		System.out.println("Check Sales?");
 
+		boolean bossCheck;
 
+		String bossQuestion;
+		bossQuestion = inScan.nextLine();
+		bossCheck = bossReady(bossQuestion);
 
+//		System.out.println(bossCheck);
+
+		if(bossCheck){
+			System.out.println("Today's Sales Were:");
+			//displayBossTotal();
+			//method likedisplayTotal but change to bossDispalyTotal and change file to storeHistory.txt
+		}
+
+		System.out.println("Enjoy your break!");
 
 		return;
 
@@ -298,6 +430,31 @@ public class assig1methods
 
 	}
 
+
+
+
+
+	public static boolean bossReady(String cQuestion){
+		//System.out.println("I can help the next person in line. Is there another customer? \n[say yes, or ya, or ok, or si, or y, or ya dude, or 1]");
+		
+
+		String[] validResponse = { "1", "yes", "y","ya dude", "ya", "ok", "si"};
+
+		boolean ready = false;
+// loop through the list of valid responses and check if first response 
+		// given is a valid response 
+		for (String s:validResponse){
+			// if the first response given is found in the valid response list
+			if (cQuestion.toLowerCase().equals(s)){
+			// if true, this sets customer ready to true which will be used to
+			// start or end the program
+				ready = true;
+			}
+		}
+
+		return ready;
+
+	}
 //		if (!ready){
 //			ready = false;
 //		}
@@ -799,10 +956,10 @@ public static int updateBroomstick(boolean special){
 
 /////
 
-	public static void displayTotal(boolean special){
+	public static int displayTotal(boolean special){
 
 		
-
+	int totalBill = 0;
 		//String fileLocation = "customerBill.txt";
 
 	try{
@@ -845,7 +1002,7 @@ public static int updateBroomstick(boolean special){
 
 
 
-		int totalBill = 0;
+		//int totalBill = 0;
 
 		while ((line = br.readLine()) != null){
 ////////////////////////////////////////////////////////////////////////////////////			
@@ -1074,8 +1231,285 @@ public static int updateBroomstick(boolean special){
 	catch (IOException e){
 		e.printStackTrace();
 	}
-		
+		return totalBill;
 }
+
+
+/*public static int displayBossTotal(){
+
+		
+	int totalBill = 0;
+		//String fileLocation = "customerBill.txt";
+
+	try{
+		FileReader fr = new FileReader("storeHistory.txt");
+		BufferedReader br = new BufferedReader(fr);
+		//BufferedReader br = new BufferedReader(new FileReader("customerBill.txt"));
+//		String aLineFromFile = null;
+
+		String line;
+
+		int pin1Total=0;
+		int pin2Total=0;
+		int pin3Total=0;
+		int pin4Total=0;
+		int quaffleTotal=0;
+		int quaffleBoxTotal = 0;
+		int broomTotal=0;
+
+
+		int totalPinCount = 0;
+
+		int pin1TotalCost=0;
+		int pin2TotalCost=0;
+		int pin3TotalCost=0;
+		int pin4TotalCost=0;
+
+
+// in knuts
+		
+		int regQuaffleCost = 145;
+		int regQuaffleBoxCost = 638;
+		int regBroomCost = 986;
+		int specQuaffleBoxCost = 580; 
+		int specBroomCost = 899;
+
+
+
+		int broomTotalCost = 0;
+		int quaffleTotalCost = 0;
+
+
+
+		//int totalBill = 0;
+
+		while ((line = br.readLine()) != null){
+////////////////////////////////////////////////////////////////////////////////////			
+////////////////////////////////////////////////////////////////////////////////////			
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+		// instead of printing, need to manipulate based on special
+
+		//	JOptionPane.showMessageDialog(null, line);
+
+			//method for converting txt to bill
+			//System.out.println(line);
+
+
+
+			// store future values of orders in here
+
+			String category = convertCategory(line);
+			String orderAmount = convertOrderAmount(line);
+
+			int orderInt = Integer.parseInt(orderAmount);
+
+
+
+			if(category.equals("Gryffindor Pin(s): ")){
+				pin1Total += orderInt;
+				totalPinCount += orderInt;
+			}
+			else if(category.equals("Slytherin Pin(s): ")){
+				pin2Total += orderInt;
+				totalPinCount += orderInt;
+			}
+			else if(category.equals("Hufflepuff Pin(s): ")){
+				pin3Total += orderInt;
+				totalPinCount += orderInt;
+			}
+			else if(category.equals("Ravenclaw Pin(s): ")){
+				pin4Total += orderInt;
+				totalPinCount += orderInt;
+			}
+			else if(category.equals("Quaffle(s): ")){
+				quaffleTotal += orderInt;
+				if(quaffleTotal>4){
+					quaffleBoxTotal = quaffleTotal/ 5;
+					// should have returned 0 if box count went to one but didn't display
+					// anything until the next order came in... so it works but not initially
+					// just going to keep this commented out for now, I think its fine that
+					// it says how many quaffles you have and the total boxes
+					//quaffleTotal = quaffleTotal % 5;
+				}
+				//quaffleTotal = quaffleTotal % 5;
+			}
+			else if(category.equals("Broomstick Kit(s): ")){
+				broomTotal += orderInt;
+			}
+
+			//System.out.println(category + orderAmount);
+
+			//System.out.println(category + pin1Total);
+//			System.out.println("Gryffindor Pin(s): " + pin1Total);
+//			System.out.println("Slytherin Pin(s): " + pin2Total);
+//			System.out.println("Hufflepuff Pin(s): " + pin3Total);
+//			System.out.println("Ravenclaw Pin(s): " + pin4Total);
+
+			//System.out.printf(orderAmount);
+
+
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////			
+//		}
+		
+		}
+		// only display if orders made
+			System.out.println("**************************************");
+			System.out.println("********** -STORE RECEIPT-  **********");
+			System.out.println("**************************************");
+
+			
+			if((totalPinCount>0) && special && (totalPinCount>=10)){
+				System.out.println("Total Pin Order: " + totalPinCount + " ( **Discounted Prices**)");
+			}
+			else if ((totalPinCount>0) && special && (totalPinCount<10)) {
+				System.out.println("Total Pin Order: " + totalPinCount);
+
+			}
+			if((totalPinCount>0) && !special){
+				System.out.println("Total Pin Order: " + totalPinCount);	
+			}
+
+
+
+
+			if(pin1Total>0){
+
+				// method that totals up??
+				//totalDue(pin1Total);
+				//System.out.println("Gryffindor Pin(s): " + pin1Total);
+				// if special and order above min
+				if(special && (totalPinCount>=10)){
+					pin1TotalCost = pin1Total* 18;
+				}
+				// special customer but didn't order min amount for discount
+				else if(special && (pin1Total<10)){
+					pin1TotalCost = pin1Total *20;
+				}	
+				// not special customer cost
+				else if(!special){
+					pin1TotalCost = pin1Total * 20;
+				}
+				System.out.println("	Gryffindor Pin(s): " + pin1Total);
+				System.out.println("	Gryffindor Pin(s) Total Cost: " + pin1TotalCost + " Knuts");
+
+			}
+			if(pin2Total>0){
+
+				if(special && (totalPinCount>=10)){
+					pin2TotalCost = pin2Total* 18;
+				}
+				// special customer but didn't order min amount for discount
+				else if(special && (pin2Total<10)){
+					pin2TotalCost = pin2Total *20;
+				}	
+				// not special customer cost
+				else if(!special){
+					pin2TotalCost = pin2Total * 20;
+				}
+				
+				System.out.println("	Slytherin Pin(s): " + pin2Total);	
+				System.out.println("	Slytherin Pin(s) Total Cost: " + pin2TotalCost + " Knuts");	
+
+			}
+			if(pin3Total>0){
+				if(special && (totalPinCount>=10)){
+					pin3TotalCost = pin3Total* 18;
+				}
+				// special customer but didn't order min amount for discount
+				else if(special && (pin3Total<10)){
+					pin3TotalCost = pin3Total *20;
+				}	
+				// not special customer cost
+				else if(!special){
+					pin3TotalCost = pin3Total * 20;
+				}
+				System.out.println("	Hufflepuff Pin(s): " + pin3Total);
+				System.out.println("	Hufflepuff Pin(s) Total Cost: " + pin3TotalCost + " Knuts");	
+				
+			}
+			if(pin4Total>0){
+				if(special && (totalPinCount>=10)){
+					pin4TotalCost = pin4Total* 18;
+				}
+				// special customer but didn't order min amount for discount
+				else if(special && (pin4Total<10)){
+					pin4TotalCost = pin4Total *20;
+				}	
+				// not special customer cost
+				else if(!special){
+					pin4TotalCost = pin4Total * 20;
+				}
+				System.out.println("	Ravenclaw Pin(s): " + pin4Total);
+				System.out.println("	Ravenclaw Pin(s) Total Cost: " + pin4TotalCost + " Knuts");	
+				
+			}
+			if(quaffleTotal>0){
+				//if(special){
+				//	quaffleTotalCost = specQuaffleBoxCost;
+				//}
+				//else if(!special){
+				//	quaffleTotalCost = regQuaffleCost
+				//}
+
+				if(special){
+
+					quaffleTotal = quaffleTotal % 5;
+					quaffleTotalCost += specQuaffleBoxCost * quaffleBoxTotal;
+					quaffleTotalCost += regQuaffleCost * quaffleTotal;
+				}
+				else if(!special){
+					quaffleTotal = quaffleTotal % 5;
+					quaffleTotalCost += regQuaffleBoxCost * quaffleBoxTotal;
+					quaffleTotalCost += regQuaffleCost * quaffleTotal;
+				}
+
+
+				System.out.println("Quaffle(s): " + quaffleTotal);	
+				System.out.println("Quaffle Box(s): " + quaffleBoxTotal);
+				System.out.println("Quaffle Box(s) Total: " + quaffleTotalCost);
+
+			}
+			if(broomTotal>0){
+				System.out.println("Broomstick Kit(s): " + broomTotal);	
+
+					broomTotalCost = regBroomCost * broomTotal;
+				}
+				
+				System.out.println("Broomstick Kit(s) Total: " + broomTotalCost + " Knuts");	
+
+			}
+
+			System.out.println("**************************************");
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			/// need to return outside function so i can accept payment with amount
+			totalBill += (broomTotalCost + quaffleTotalCost + pin1TotalCost + pin2TotalCost + pin3TotalCost + pin4TotalCost);
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+			System.out.println("-----   Total Bill Due: " + totalBill + "   -----");
+			
+			System.out.println("**************************************");
+			
+
+		fr.close();
+	}
+	catch (IOException e){
+		e.printStackTrace();
+	}
+		return totalBill;
+}
+
+*/
 
 
 	
@@ -1119,8 +1553,6 @@ public static String convertOrderAmount(String line){
 	return orderAmount;
 }
 
-
-		
 
 
 ////////////////	
