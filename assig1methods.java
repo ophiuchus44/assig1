@@ -233,7 +233,7 @@ public class assig1methods
 					totalPaid+=knutsPaid;
 					//System.out.println("Your Total Knuts Payment Amount is: "+ knutsPaid);
 					//updatePins(special);s
-					paid = false;
+				//	paid = false;
 					break;
 				case 2:
 					System.out.println("Enter Sickle(s) Amount: ");
@@ -242,13 +242,14 @@ public class assig1methods
 					sicklesPaid+=sicklesPaymentAmount;
 
 					// convert sickles to Knuts
-					knutsPaid = sicklesPaid*29;
+					int sickleknutsPaid = 0;
+					sickleknutsPaid = sicklesPaymentAmount*29;
 
-					totalPaid+=knutsPaid;
+					totalPaid+=sickleknutsPaid;
 					//System.out.println("Your Total Sickle(s) Payment Amount is: "+ sicklesPaid);
 					
 
-					paid = false;
+				//	paid = false;
 					break;
 				case 3:
 					System.out.println("Enter Galleon(s) Amount: ");
@@ -256,19 +257,40 @@ public class assig1methods
 					galleonPaymentAmount = Integer.parseInt(tempScan3);
 					galleonsPaid+=galleonPaymentAmount;
 
-					// convert galleons to knuts
-					knutsPaid = galleonsPaid*493;
 
-					totalPaid+=knutsPaid;
+					int galleonknutsPaid=0;
+					// convert galleons to knuts
+					galleonknutsPaid = galleonPaymentAmount*493;
+
+					totalPaid+=galleonknutsPaid;
 					//System.out.println("Your Total Galleon(s) Payment Amount is: "+ galleonsPaid);
 
 
-					paid = true;
+				//	paid = false;
 					break;
 			}
 
+			System.out.println("Total Due (in Knuts): " + customerTotal);
 			System.out.println("Total Paid (in Knuts): " + totalPaid);
 
+			if(customerTotal<=totalPaid){
+				if (totalPaid>customerTotal){
+					int change = 0;
+					change = totalPaid - customerTotal;	
+					System.out.println("Your change is " + change + " in Knuts");	
+				}
+				paid = true;
+			}
+//			else if(customerTotal<totalPaid){
+//				int change = 0;
+//				change = totalPaid - customerTotal;
+//				System.out.println("Your change is " + change + " in Knuts");
+//				paid = true;
+//			}
+
+			else if (customerTotal>totalPaid) {
+				paid = false;
+			}
 
 
 			//System.out.println("Total Knut(s) Paid: " + knutsPaid);
@@ -293,6 +315,14 @@ public class assig1methods
 		System.out.println("You have paid in full.");
 
 
+
+		/// print receipt?
+
+
+
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -302,11 +332,13 @@ public class assig1methods
 
 
 
-
+		System.out.println("*****************************************************************************");
 
 		// DELETE OLD CUSTOMER DATA
 		
 		deleteData();
+
+		System.out.println("*****************************************************************************");
 
 		// NEXT CUSTOMER //
 
@@ -341,7 +373,7 @@ public class assig1methods
 ////////////////////////////////////////////////////////////////////////////
 
 		
-		System.out.println("Check Sales?");
+		System.out.println("Check Sales?  \n[say: yes, or ya, or ok, or si, or y, or ya dude, or 1]");
 
 		boolean bossCheck;
 
@@ -353,6 +385,14 @@ public class assig1methods
 
 		if(bossCheck){
 			System.out.println("Today's Sales Were:");
+
+			System.out.println("I forgot to add a part when writing data to file that would");
+			System.out.println("add an additional field to the text file, 1/0 depending on if");
+			System.out.println("the user was special or not. If I have time, I will add the additional");
+			System.out.println("field to the update methods... which will be difficult because of the ");
+			System.out.println("way I'm parsing the data in text file... and the way I'm converting the");
+			System.out.println("data later... I could have done this better but storeHistory.txt will have");
+			System.out.println("a history of everything and the feature could be added in the future easily.");
 			//displayBossTotal();
 			//method likedisplayTotal but change to bossDispalyTotal and change file to storeHistory.txt
 		}
@@ -1572,8 +1612,9 @@ public static String convertOrderAmount(String line){
 
 
 
-//////////// major problems
-// none currently
+//////////// major problems/ known errors
+// entering negative numbers where inScan is used... doesn't crash but enters data in as negative..
+// need to add a condition somehwere to prevent non negative numbers from being entered...
 
 
 
