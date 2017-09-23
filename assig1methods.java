@@ -175,7 +175,19 @@ public class assig1methods
 
 		// method for giving receipt
 
-	
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		System.out.println("How would you like to pay? We accept Galleons, Sickles and Knuts");
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 		// after customer checks out 
 
 
@@ -832,6 +844,9 @@ public static int updateBroomstick(boolean special){
 		int quaffleTotalCost = 0;
 
 
+
+		int totalBill = 0;
+
 		while ((line = br.readLine()) != null){
 ////////////////////////////////////////////////////////////////////////////////////			
 ////////////////////////////////////////////////////////////////////////////////////			
@@ -906,7 +921,8 @@ public static int updateBroomstick(boolean special){
 		
 		}
 		// only display if orders made
-
+			System.out.println("**************************************");
+			System.out.println("********** CUSTOMER RECEIPT **********");
 			System.out.println("**************************************");
 
 			
@@ -917,6 +933,10 @@ public static int updateBroomstick(boolean special){
 				System.out.println("Total Pin Order: " + totalPinCount);
 
 			}
+			if((totalPinCount>0) && !special){
+				System.out.println("Total Pin Order: " + totalPinCount);	
+			}
+
 
 
 
@@ -937,8 +957,8 @@ public static int updateBroomstick(boolean special){
 				else if(!special){
 					pin1TotalCost = pin1Total * 20;
 				}
-				System.out.println("Gryffindor Pin(s): " + pin1Total);
-				System.out.println("Gryffindor Pin(s) Total Cost: " + pin1TotalCost + " Knuts");
+				System.out.println("	Gryffindor Pin(s): " + pin1Total);
+				System.out.println("	Gryffindor Pin(s) Total Cost: " + pin1TotalCost + " Knuts");
 
 			}
 			if(pin2Total>0){
@@ -955,8 +975,8 @@ public static int updateBroomstick(boolean special){
 					pin2TotalCost = pin2Total * 20;
 				}
 				
-				System.out.println("Slytherin Pin(s): " + pin2Total);	
-				System.out.println("Slytherin Pin(s) Total Cost: " + pin2TotalCost + " Knuts");	
+				System.out.println("	Slytherin Pin(s): " + pin2Total);	
+				System.out.println("	Slytherin Pin(s) Total Cost: " + pin2TotalCost + " Knuts");	
 
 			}
 			if(pin3Total>0){
@@ -971,8 +991,8 @@ public static int updateBroomstick(boolean special){
 				else if(!special){
 					pin3TotalCost = pin3Total * 20;
 				}
-				System.out.println("Hufflepuff Pin(s): " + pin3Total);
-				System.out.println("Hufflepuff Pin(s) Total Cost: " + pin3TotalCost + " Knuts");	
+				System.out.println("	Hufflepuff Pin(s): " + pin3Total);
+				System.out.println("	Hufflepuff Pin(s) Total Cost: " + pin3TotalCost + " Knuts");	
 				
 			}
 			if(pin4Total>0){
@@ -987,8 +1007,8 @@ public static int updateBroomstick(boolean special){
 				else if(!special){
 					pin4TotalCost = pin4Total * 20;
 				}
-				System.out.println("Ravenclaw Pin(s): " + pin4Total);
-				System.out.println("Ravenclaw Pin(s) Total Cost: " + pin4TotalCost + " Knuts");	
+				System.out.println("	Ravenclaw Pin(s): " + pin4Total);
+				System.out.println("	Ravenclaw Pin(s) Total Cost: " + pin4TotalCost + " Knuts");	
 				
 			}
 			if(quaffleTotal>0){
@@ -999,10 +1019,23 @@ public static int updateBroomstick(boolean special){
 				//	quaffleTotalCost = regQuaffleCost
 				//}
 
+				if(special){
+
+					quaffleTotal = quaffleTotal % 5;
+					quaffleTotalCost += specQuaffleBoxCost * quaffleBoxTotal;
+					quaffleTotalCost += regQuaffleCost * quaffleTotal;
+				}
+				else if(!special){
+					quaffleTotal = quaffleTotal % 5;
+					quaffleTotalCost += regQuaffleBoxCost * quaffleBoxTotal;
+					quaffleTotalCost += regQuaffleCost * quaffleTotal;
+				}
 
 
 				System.out.println("Quaffle(s): " + quaffleTotal);	
 				System.out.println("Quaffle Box(s): " + quaffleBoxTotal);
+				System.out.println("Quaffle Box(s) Total: " + quaffleTotalCost);
+
 			}
 			if(broomTotal>0){
 				System.out.println("Broomstick Kit(s): " + broomTotal);	
@@ -1017,8 +1050,24 @@ public static int updateBroomstick(boolean special){
 				System.out.println("Broomstick Kit(s) Total: " + broomTotalCost + " Knuts");	
 
 			}
+
+			System.out.println("**************************************");
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			/// need to return outside function so i can accept payment with amount
+			totalBill += (broomTotalCost + quaffleTotalCost + pin1TotalCost + pin2TotalCost + pin3TotalCost + pin4TotalCost);
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+			System.out.println("-----   Total Bill Due: " + totalBill + "   -----");
 			
 			System.out.println("**************************************");
+			
 
 		fr.close();
 	}
@@ -1092,10 +1141,14 @@ public static String convertOrderAmount(String line){
 
 
 //////////// major problems
+// none currently
+
 
 
 /////////// next steps
 
-//take totalCount and convert to cost amount in Knuts
+// need to extract total bill in knuts to main so an acceptPayment(totalBill) 
+// method can be called after display
+
 
 
