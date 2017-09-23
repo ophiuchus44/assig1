@@ -153,7 +153,7 @@ public class assig1methods
 					displayPrices(special);
 					break;
 				case 5:
-					System.out.println("You pressesed option 5... good bye!");
+					System.out.println("Your total bill is: ");
 
 					break;
 			}
@@ -507,6 +507,8 @@ public static int updateBroomstick(boolean special){
 
 //////////////////////////////////////////////////////////////////////
 			// why doesn't inScan inherit from main? .... hmmm
+			// probably could have passed inScan as parameter/argument
+			// in method
 			Scanner inScan = new Scanner(System.in);
 
 			menuChoice = inScan.nextInt();
@@ -804,7 +806,31 @@ public static int updateBroomstick(boolean special){
 		int pin3Total=0;
 		int pin4Total=0;
 		int quaffleTotal=0;
+		int quaffleBoxTotal = 0;
 		int broomTotal=0;
+
+
+		int totalPinCount = 0;
+
+		int pin1TotalCost=0;
+		int pin2TotalCost=0;
+		int pin3TotalCost=0;
+		int pin4TotalCost=0;
+
+
+// in knuts
+		
+		int regQuaffleCost = 145;
+		int regQuaffleBoxCost = 638;
+		int regBroomCost = 986;
+		int specQuaffleBoxCost = 580; 
+		int specBroomCost = 899;
+
+
+
+		int broomTotalCost = 0;
+		int quaffleTotalCost = 0;
+
 
 		while ((line = br.readLine()) != null){
 ////////////////////////////////////////////////////////////////////////////////////			
@@ -831,18 +857,31 @@ public static int updateBroomstick(boolean special){
 
 			if(category.equals("Gryffindor Pin(s): ")){
 				pin1Total += orderInt;
+				totalPinCount += orderInt;
 			}
 			else if(category.equals("Slytherin Pin(s): ")){
 				pin2Total += orderInt;
+				totalPinCount += orderInt;
 			}
 			else if(category.equals("Hufflepuff Pin(s): ")){
 				pin3Total += orderInt;
+				totalPinCount += orderInt;
 			}
 			else if(category.equals("Ravenclaw Pin(s): ")){
 				pin4Total += orderInt;
+				totalPinCount += orderInt;
 			}
 			else if(category.equals("Quaffle(s): ")){
 				quaffleTotal += orderInt;
+				if(quaffleTotal>4){
+					quaffleBoxTotal = quaffleTotal/ 5;
+					// should have returned 0 if box count went to one but didn't display
+					// anything until the next order came in... so it works but not initially
+					// just going to keep this commented out for now, I think its fine that
+					// it says how many quaffles you have and the total boxes
+					//quaffleTotal = quaffleTotal % 5;
+				}
+				//quaffleTotal = quaffleTotal % 5;
 			}
 			else if(category.equals("Broomstick Kit(s): ")){
 				broomTotal += orderInt;
@@ -869,26 +908,114 @@ public static int updateBroomstick(boolean special){
 		// only display if orders made
 
 			System.out.println("**************************************");
+
+			
+			if((totalPinCount>0) && special && (totalPinCount>=10)){
+				System.out.println("Total Pin Order: " + totalPinCount + " ( **Discounted Prices**)");
+			}
+			else if ((totalPinCount>0) && special && (totalPinCount<10)) {
+				System.out.println("Total Pin Order: " + totalPinCount);
+
+			}
+
+
+
 			if(pin1Total>0){
 
 				// method that totals up??
 				//totalDue(pin1Total);
-				System.out.println("Gryffindor Pin(s): " + pin1Total);	
+				//System.out.println("Gryffindor Pin(s): " + pin1Total);
+				// if special and order above min
+				if(special && (totalPinCount>=10)){
+					pin1TotalCost = pin1Total* 18;
+				}
+				// special customer but didn't order min amount for discount
+				else if(special && (pin1Total<10)){
+					pin1TotalCost = pin1Total *20;
+				}	
+				// not special customer cost
+				else if(!special){
+					pin1TotalCost = pin1Total * 20;
+				}
+				System.out.println("Gryffindor Pin(s): " + pin1Total);
+				System.out.println("Gryffindor Pin(s) Total Cost: " + pin1TotalCost + " Knuts");
+
 			}
 			if(pin2Total>0){
+
+				if(special && (totalPinCount>=10)){
+					pin2TotalCost = pin2Total* 18;
+				}
+				// special customer but didn't order min amount for discount
+				else if(special && (pin2Total<10)){
+					pin2TotalCost = pin2Total *20;
+				}	
+				// not special customer cost
+				else if(!special){
+					pin2TotalCost = pin2Total * 20;
+				}
+				
 				System.out.println("Slytherin Pin(s): " + pin2Total);	
+				System.out.println("Slytherin Pin(s) Total Cost: " + pin2TotalCost + " Knuts");	
+
 			}
 			if(pin3Total>0){
+				if(special && (totalPinCount>=10)){
+					pin3TotalCost = pin3Total* 18;
+				}
+				// special customer but didn't order min amount for discount
+				else if(special && (pin3Total<10)){
+					pin3TotalCost = pin3Total *20;
+				}	
+				// not special customer cost
+				else if(!special){
+					pin3TotalCost = pin3Total * 20;
+				}
 				System.out.println("Hufflepuff Pin(s): " + pin3Total);
+				System.out.println("Hufflepuff Pin(s) Total Cost: " + pin3TotalCost + " Knuts");	
+				
 			}
 			if(pin4Total>0){
-				System.out.println("Ravenclaw Pin(s): " + pin4Total);	
+				if(special && (totalPinCount>=10)){
+					pin4TotalCost = pin4Total* 18;
+				}
+				// special customer but didn't order min amount for discount
+				else if(special && (pin4Total<10)){
+					pin4TotalCost = pin4Total *20;
+				}	
+				// not special customer cost
+				else if(!special){
+					pin4TotalCost = pin4Total * 20;
+				}
+				System.out.println("Ravenclaw Pin(s): " + pin4Total);
+				System.out.println("Ravenclaw Pin(s) Total Cost: " + pin4TotalCost + " Knuts");	
+				
 			}
 			if(quaffleTotal>0){
+				//if(special){
+				//	quaffleTotalCost = specQuaffleBoxCost;
+				//}
+				//else if(!special){
+				//	quaffleTotalCost = regQuaffleCost
+				//}
+
+
+
 				System.out.println("Quaffle(s): " + quaffleTotal);	
+				System.out.println("Quaffle Box(s): " + quaffleBoxTotal);
 			}
 			if(broomTotal>0){
-				System.out.println("Brromstick Kit(s): " + broomTotal);	
+				System.out.println("Broomstick Kit(s): " + broomTotal);	
+
+				if(special){
+					broomTotalCost = specBroomCost * broomTotal;
+				}
+				else if(!special){
+					broomTotalCost = regBroomCost * broomTotal;
+				}
+				
+				System.out.println("Broomstick Kit(s) Total: " + broomTotalCost + " Knuts");	
+
 			}
 			
 			System.out.println("**************************************");
@@ -965,7 +1092,10 @@ public static String convertOrderAmount(String line){
 
 
 //////////// major problems
-//////// can't read data back in to do next step of conversions and payment
-/////// need to get info out of txt file....
-/////////
+
+
+/////////// next steps
+
+//take totalCount and convert to cost amount in Knuts
+
 
