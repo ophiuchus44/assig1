@@ -225,6 +225,13 @@ public class assig1methods
 
 					knutsPaymentAmount = Integer.parseInt(tempScan);
 
+					while(knutsPaymentAmount<1){
+						System.out.println("Enter Knut(s) Amount: ");
+						tempScan = inScan.nextLine();
+						knutsPaymentAmount = Integer.parseInt(tempScan);
+					}
+
+
 					knutsPaid+=knutsPaymentAmount;
 
 					//method for returning paid = true
@@ -239,6 +246,14 @@ public class assig1methods
 					System.out.println("Enter Sickle(s) Amount: ");
 					String tempScan2 = inScan.nextLine();
 					sicklesPaymentAmount = Integer.parseInt(tempScan2);
+
+					while(sicklesPaymentAmount<1){
+						System.out.println("Enter Sickle(s) Amount: ");
+						tempScan2 = inScan.nextLine();
+						sicklesPaymentAmount = Integer.parseInt(tempScan2);
+					}
+
+
 					sicklesPaid+=sicklesPaymentAmount;
 
 					// convert sickles to Knuts
@@ -255,6 +270,14 @@ public class assig1methods
 					System.out.println("Enter Galleon(s) Amount: ");
 					String tempScan3 = inScan.nextLine();
 					galleonPaymentAmount = Integer.parseInt(tempScan3);
+
+					while(galleonPaymentAmount<1){
+						System.out.println("Enter Galleon(s) Amount: ");
+						tempScan3 = inScan.nextLine();
+						galleonPaymentAmount = Integer.parseInt(tempScan3);
+					}
+
+
 					galleonsPaid+=galleonPaymentAmount;
 
 
@@ -277,7 +300,19 @@ public class assig1methods
 				if (totalPaid>customerTotal){
 					int change = 0;
 					change = totalPaid - customerTotal;	
-					System.out.println("Your change is " + change + " in Knuts");	
+					System.out.println("Your change is " + change + " in Knuts");
+					
+					// convert to sickles and galleons//
+					// display in order, galleons are highest and should be checked first
+					// if change / 493
+					// then galleon
+					//	change = (change - (493*galleon))
+					// else if change /  
+
+					//int subSickles = 0;
+					//int subGalleon = 0;
+					//System.out.println("or" + change + " in Knuts");
+
 				}
 				paid = true;
 			}
@@ -384,7 +419,10 @@ public class assig1methods
 //		System.out.println(bossCheck);
 
 		if(bossCheck){
-			System.out.println("Today's Sales Were:");
+			System.out.println("Today's Inventory of Sales Were:");
+			displayBossTotal();
+
+// what if i only show how many they sold of each... more of a inventory system
 
 			System.out.println("I forgot to add a part when writing data to file that would");
 			System.out.println("add an additional field to the text file, 1/0 depending on if");
@@ -588,6 +626,10 @@ public class assig1methods
 				case 1:
 					System.out.println("How many Gryffindor pins would you like?");
 					int order1 = inScan.nextInt();
+					while(order1<1){
+						System.out.println("How many Gryffindor pins would you like?");
+						order1 = inScan.nextInt();
+					}
 					// for tracking data later on
 					int option1 = 1;
 					
@@ -605,6 +647,12 @@ public class assig1methods
 				case 2:
 					System.out.println("How many Slytherin pins would you like?");
 					int order2 = inScan.nextInt();
+					while(order2<1){
+						System.out.println("How many Slytherin pins would you like?");
+						order2 = inScan.nextInt();
+					}
+
+
 					int option2 = 2;
 					add2Total(menuCategory,option2,order2);
 					add2StoreTotal(menuCategory,option2,order2);
@@ -614,6 +662,11 @@ public class assig1methods
 				case 3:
 					System.out.println("How many Hufflepuff pins would you like?");
 					int order3 = inScan.nextInt();
+
+					while(order3<1){
+						System.out.println("How many Hufflepuff pins would you like?");
+						order3 = inScan.nextInt();
+					}
 					int option3 = 3;
 					add2Total(menuCategory,option3,order3);
 					add2StoreTotal(menuCategory,option3,order3);
@@ -623,6 +676,10 @@ public class assig1methods
 				case 4:
 					System.out.println("How many Ravenclaw pins would you like?");
 					int order4 = inScan.nextInt();
+					while(order4<1){
+						System.out.println("How many Ravenclaw pins would you like?");
+						order4 = inScan.nextInt();
+					}
 					int option4 = 4;
 					add2Total(menuCategory,option4,order4);
 					add2StoreTotal(menuCategory,option4,order4);
@@ -679,6 +736,12 @@ public class assig1methods
 				case 1:
 					System.out.println("How many Quaffles would you like?");
 					int order1 = inScan.nextInt();
+					while(order1<1){
+						System.out.println("How many Quaffles would you like?");
+						order1 = inScan.nextInt();
+					}
+
+
 					// for tracking data later on
 					int option1 = 1; 
 					add2Total(menuCategory,option1,order1);
@@ -728,6 +791,11 @@ public static int updateBroomstick(boolean special){
 				case 1:
 					System.out.println("How many Broomsticks would you like?");
 					int order1 = inScan.nextInt();
+					while(order1<1){
+						System.out.println("How many Broomsticks would you like?");
+						order1 = inScan.nextInt();
+					}
+
 					// for tracking data later on
 					int option1 = 1; 
 					add2Total(menuCategory,option1,order1);
@@ -994,7 +1062,7 @@ public static int updateBroomstick(boolean special){
 
 
 
-/////
+//////////////////////////////////////////////////////////////////////////////
 
 	public static int displayTotal(boolean special){
 
@@ -1275,10 +1343,10 @@ public static int updateBroomstick(boolean special){
 }
 
 
-/*public static int displayBossTotal(){
+public static void displayBossTotal(){
 
 		
-	int totalBill = 0;
+	//int totalBill = 0;
 		//String fileLocation = "customerBill.txt";
 
 	try{
@@ -1300,24 +1368,7 @@ public static int updateBroomstick(boolean special){
 
 		int totalPinCount = 0;
 
-		int pin1TotalCost=0;
-		int pin2TotalCost=0;
-		int pin3TotalCost=0;
-		int pin4TotalCost=0;
-
-
-// in knuts
-		
-		int regQuaffleCost = 145;
-		int regQuaffleBoxCost = 638;
-		int regBroomCost = 986;
-		int specQuaffleBoxCost = 580; 
-		int specBroomCost = 899;
-
-
-
-		int broomTotalCost = 0;
-		int quaffleTotalCost = 0;
+	
 
 
 
@@ -1401,127 +1452,18 @@ public static int updateBroomstick(boolean special){
 			System.out.println("********** -STORE RECEIPT-  **********");
 			System.out.println("**************************************");
 
-			
-			if((totalPinCount>0) && special && (totalPinCount>=10)){
-				System.out.println("Total Pin Order: " + totalPinCount + " ( **Discounted Prices**)");
-			}
-			else if ((totalPinCount>0) && special && (totalPinCount<10)) {
-				System.out.println("Total Pin Order: " + totalPinCount);
 
-			}
-			if((totalPinCount>0) && !special){
-				System.out.println("Total Pin Order: " + totalPinCount);	
-			}
+			//System.out.println(category + pin1Total);
+			System.out.println("* Gryffindor Pin(s): " + pin1Total);
+			System.out.println("* Slytherin Pin(s): " + pin2Total);
+			System.out.println("* Hufflepuff Pin(s): " + pin3Total);
+			System.out.println("* Ravenclaw Pin(s): " + pin4Total);
+			System.out.println("* Quaffle(s): " + quaffleTotal);
+			System.out.println("* Quaffle Box(s): " + quaffleBoxTotal);
+			System.out.println("* Broomstick Kit(s): " + broomTotal);
 
 
 
-
-			if(pin1Total>0){
-
-				// method that totals up??
-				//totalDue(pin1Total);
-				//System.out.println("Gryffindor Pin(s): " + pin1Total);
-				// if special and order above min
-				if(special && (totalPinCount>=10)){
-					pin1TotalCost = pin1Total* 18;
-				}
-				// special customer but didn't order min amount for discount
-				else if(special && (pin1Total<10)){
-					pin1TotalCost = pin1Total *20;
-				}	
-				// not special customer cost
-				else if(!special){
-					pin1TotalCost = pin1Total * 20;
-				}
-				System.out.println("	Gryffindor Pin(s): " + pin1Total);
-				System.out.println("	Gryffindor Pin(s) Total Cost: " + pin1TotalCost + " Knuts");
-
-			}
-			if(pin2Total>0){
-
-				if(special && (totalPinCount>=10)){
-					pin2TotalCost = pin2Total* 18;
-				}
-				// special customer but didn't order min amount for discount
-				else if(special && (pin2Total<10)){
-					pin2TotalCost = pin2Total *20;
-				}	
-				// not special customer cost
-				else if(!special){
-					pin2TotalCost = pin2Total * 20;
-				}
-				
-				System.out.println("	Slytherin Pin(s): " + pin2Total);	
-				System.out.println("	Slytherin Pin(s) Total Cost: " + pin2TotalCost + " Knuts");	
-
-			}
-			if(pin3Total>0){
-				if(special && (totalPinCount>=10)){
-					pin3TotalCost = pin3Total* 18;
-				}
-				// special customer but didn't order min amount for discount
-				else if(special && (pin3Total<10)){
-					pin3TotalCost = pin3Total *20;
-				}	
-				// not special customer cost
-				else if(!special){
-					pin3TotalCost = pin3Total * 20;
-				}
-				System.out.println("	Hufflepuff Pin(s): " + pin3Total);
-				System.out.println("	Hufflepuff Pin(s) Total Cost: " + pin3TotalCost + " Knuts");	
-				
-			}
-			if(pin4Total>0){
-				if(special && (totalPinCount>=10)){
-					pin4TotalCost = pin4Total* 18;
-				}
-				// special customer but didn't order min amount for discount
-				else if(special && (pin4Total<10)){
-					pin4TotalCost = pin4Total *20;
-				}	
-				// not special customer cost
-				else if(!special){
-					pin4TotalCost = pin4Total * 20;
-				}
-				System.out.println("	Ravenclaw Pin(s): " + pin4Total);
-				System.out.println("	Ravenclaw Pin(s) Total Cost: " + pin4TotalCost + " Knuts");	
-				
-			}
-			if(quaffleTotal>0){
-				//if(special){
-				//	quaffleTotalCost = specQuaffleBoxCost;
-				//}
-				//else if(!special){
-				//	quaffleTotalCost = regQuaffleCost
-				//}
-
-				if(special){
-
-					quaffleTotal = quaffleTotal % 5;
-					quaffleTotalCost += specQuaffleBoxCost * quaffleBoxTotal;
-					quaffleTotalCost += regQuaffleCost * quaffleTotal;
-				}
-				else if(!special){
-					quaffleTotal = quaffleTotal % 5;
-					quaffleTotalCost += regQuaffleBoxCost * quaffleBoxTotal;
-					quaffleTotalCost += regQuaffleCost * quaffleTotal;
-				}
-
-
-				System.out.println("Quaffle(s): " + quaffleTotal);	
-				System.out.println("Quaffle Box(s): " + quaffleBoxTotal);
-				System.out.println("Quaffle Box(s) Total: " + quaffleTotalCost);
-
-			}
-			if(broomTotal>0){
-				System.out.println("Broomstick Kit(s): " + broomTotal);	
-
-					broomTotalCost = regBroomCost * broomTotal;
-				}
-				
-				System.out.println("Broomstick Kit(s) Total: " + broomTotalCost + " Knuts");	
-
-			}
 
 			System.out.println("**************************************");
 
@@ -1529,14 +1471,14 @@ public static int updateBroomstick(boolean special){
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			/// need to return outside function so i can accept payment with amount
-			totalBill += (broomTotalCost + quaffleTotalCost + pin1TotalCost + pin2TotalCost + pin3TotalCost + pin4TotalCost);
+			
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-			System.out.println("-----   Total Bill Due: " + totalBill + "   -----");
+			
 			
 			System.out.println("**************************************");
 			
@@ -1546,10 +1488,10 @@ public static int updateBroomstick(boolean special){
 	catch (IOException e){
 		e.printStackTrace();
 	}
-		return totalBill;
+
 }
 
-*/
+
 
 
 	
@@ -1613,15 +1555,13 @@ public static String convertOrderAmount(String line){
 
 
 //////////// major problems/ known errors
-// entering negative numbers where inScan is used... doesn't crash but enters data in as negative..
-// need to add a condition somehwere to prevent non negative numbers from being entered...
 
+// include change that is broken down by galleon sickle and knut
 
 
 /////////// next steps
 
-// need to extract total bill in knuts to main so an acceptPayment(totalBill) 
-// method can be called after display
+
 
 
 
