@@ -8,8 +8,8 @@ import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import javax.swing.JOptionPane;
-
-
+import java.util.Date;
+import java.time.LocalDate;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -1186,9 +1186,9 @@ public static int updateBroomstick(boolean special){
 		
 		}
 		// only display if orders made
-			System.out.println("**************************************");
-			System.out.println("********** CUSTOMER RECEIPT **********");
-			System.out.println("**************************************");
+			System.out.println("*******************************************");
+			System.out.println("************ CUSTOMER RECEIPT *************");
+			System.out.println("*******************************************");
 
 			
 			if((totalPinCount>0) && special && (totalPinCount>=10)){
@@ -1316,7 +1316,7 @@ public static int updateBroomstick(boolean special){
 
 			}
 
-			System.out.println("**************************************");
+			System.out.println("*******************************************");
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1331,7 +1331,13 @@ public static int updateBroomstick(boolean special){
 
 			System.out.println("-----   Total Bill Due: " + totalBill + "   -----");
 			
-			System.out.println("**************************************");
+			System.out.println("*******************************************");
+
+			Date date = new Date();
+
+			System.out.println("*******************************************");
+			System.out.println("***** -"+ date +"-  *****");
+			System.out.println("*******************************************");
 			
 
 		fr.close();
@@ -1448,9 +1454,9 @@ public static void displayBossTotal(){
 		
 		}
 		// only display if orders made
-			System.out.println("**************************************");
-			System.out.println("********** -STORE RECEIPT-  **********");
-			System.out.println("**************************************");
+			System.out.println("*******************************************");
+			System.out.println("************  -STORE RECEIPT-  ************");
+			System.out.println("*******************************************");
 
 
 			//System.out.println(category + pin1Total);
@@ -1462,25 +1468,11 @@ public static void displayBossTotal(){
 			System.out.println("* Quaffle Box(s): " + quaffleBoxTotal);
 			System.out.println("* Broomstick Kit(s): " + broomTotal);
 
+			Date date = new Date();
 
-
-
-			System.out.println("**************************************");
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			/// need to return outside function so i can accept payment with amount
-			
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-			
-			
-			System.out.println("**************************************");
+			System.out.println("*******************************************");
+			System.out.println("***** -"+ date +"-  *****");
+			System.out.println("*******************************************");
 			
 
 		fr.close();
