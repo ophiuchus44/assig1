@@ -35,17 +35,14 @@ public class assig1methods
 	// initialize method customerReady, pass the argument customerQuestion
 	// and set to variable ready2go with boolean result 
 	ready2go = customerReady(customerQuestion);
-	System.out.println(ready2go);
+	// print to make sure customerReady returned correct boolean value
+	//System.out.println(ready2go);
 
 
 ///////////////////////////////////////////////////////////////////////////////////
-// if customer response is invalid, customer is not ready2go and we exit program //
+// if customer response is invalid, ready2go is false and and we exit program //
 ///////////////////////////////////////////////////////////////////////////////////	
 	while (ready2go){
-//		System.out.println("I'm going on my break :) ");
-		//exits program if customer is not ready
-//		return;
-
 
 /////////////////////////////////////////////////////////////////////////	
 /////////////////////////////////////////////////////////////////////////
@@ -54,6 +51,7 @@ public class assig1methods
 /////////////////////////////////////////////////////////////////////////
 
 	System.out.println("Are there any words you would like to pass me?");
+	System.out.println("(Get it?)");
 
 	String customerPassword = inScan.nextLine();
 
@@ -62,7 +60,7 @@ public class assig1methods
 	// store method call of specialCustomer with the customerPassword
 	special = specialCustomer(customerPassword);
 
-	System.out.println("You are special? " + special);
+	//System.out.println("You are special? " + special);
 
 	if(!special){
 		System.out.println("Hmm... I'll give you one more chance");
@@ -87,22 +85,32 @@ public class assig1methods
 /////////////////////////////////////////////////////////////////////////	
 /////////////////////////////////////////////////////////////////////////
 
+	//System.out.println("Next question " + customerType + " type of customer");
 
-//	int totalCount_Pin_Gryffindor;
-///	int totalCount_Pin_Slytherin;
-//	int totalCount_Pin_Hufflepuff;
-//	int totalCount_Pin_Ravenclaw;
-	
-//	int totalCount_Quaffles;
-
-//	int totalCount_Brooms;
-/////////////////////////////////////////
-	//update totals with orders???
-	// append to list or just update count
-/////////////////////////////////////////
-
-
-	System.out.println("Next question " + customerType + " type of customer");
+	if(customerType.equals("special")){
+		System.out.println("Welcome " + customerType + " customer and Dumbledore's Army Member!");
+		System.out.println("**********************************************************************");
+		System.out.println("Overall, 10% off over and above any other discounts if the order "
+			+"\n(after other discounts) is 3 Galleons or more, rounded to the nearest Knut");
+		System.out.println("**********************************************************************");
+		System.out.println("House Pins (each):  			20 Knuts");
+		System.out.println("if 10 or more purchase:    		18 Knuts");
+		System.out.println("Quaffles (each):       			145 Knuts");
+		System.out.println("Quaffles (box of 5):       		580 Knuts"); 
+		System.out.println("Broomstick Service Kits (each):	899 Knuts");
+		System.out.println("**********************************************************************");
+		//displayPrices(special);		
+	}
+	else if(customerType.equals("regular")){
+		System.out.println("Please enjoy our items at their " + customerType + " prices.");
+		System.out.println("**********************************************************************");
+		System.out.println("House Pins (each):  			20 Knuts");
+		System.out.println("Quaffles (each):       			145 Knuts");
+		System.out.println("Quaffles (box of 5):       		638 Knuts"); 
+		System.out.println("Broomstick Service Kits (each): 986 Knuts");
+		System.out.println("**********************************************************************");
+		//displayPrices(special);		
+	}
 
 	int menuChoice=0;
 
@@ -141,7 +149,7 @@ public class assig1methods
 					displayPrices(special);
 					break;
 				case 5:
-					System.out.println("Your total bill is: ");
+					//System.out.println("Your total bill is: ");
 
 					break;
 			}
@@ -169,9 +177,29 @@ public class assig1methods
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+		double customerTotalTemp= .1;
+		double tempVal=0;
+	
+		if(special && (customerTotal>1479)){
+			tempVal = customerTotalTemp * customerTotal;
+			}
+	int discount = (int) Math.round(tempVal);
+
+	customerTotal -= discount;
+
+
+
+	if(discount>0){
+		
+		System.out.println("#######################################");
+		System.out.println("You ordered more than 3 Galleons worth \n so your discount comes to: " + discount);
+		System.out.println("#######################################");
+	}
 
 // for funzies, playing with tricks
-	System.out.println("Your total comes to " + customerTotal + " Knuts." 
+	System.out.println("#######################################");
+	System.out.println("Your total comes to " + customerTotal + " Knuts."); 
+	System.out.println("#######################################"
 		+ "\nHow would you like to pay?" 
 		+ "\nWe accept Galleons, Sickles and Knuts");
 
@@ -184,9 +212,23 @@ public class assig1methods
 	int galleonsPaid = 0;
 	int totalPaid = 0;
 
+
+	int galleonChange=0;
+	int sickleChange=0;
+	int knutsChange = 0;
+
+
+	
+
 	do
+		// should exit if nothing is owed before prompting for payments...
+	// i keep moving this around and can't get it to work
 		{
-		
+		//if(customerTotal==0){
+		//	paid = true;
+		//}
+
+
 			System.out.println("****************************************");
 			System.out.println("* Note 1: We Appreciate Exact change!  *");
 			System.out.println("* Note 2: Recall our currency options: *");
@@ -214,6 +256,8 @@ public class assig1methods
 			int galleonPaymentAmount=0;
 			//displayTotal(special);
 
+
+
 			switch(menuChoice2)
 			{
 				case 1:
@@ -232,12 +276,12 @@ public class assig1methods
 					}
 
 
-					knutsPaid+=knutsPaymentAmount;
+					totalPaid+=knutsPaymentAmount;
 
 					//method for returning paid = true
 
 
-					totalPaid+=knutsPaid;
+					//totalPaid+=knutsPaid;
 					//System.out.println("Your Total Knuts Payment Amount is: "+ knutsPaid);
 					//updatePins(special);s
 				//	paid = false;
@@ -261,10 +305,7 @@ public class assig1methods
 					sickleknutsPaid = sicklesPaymentAmount*29;
 
 					totalPaid+=sickleknutsPaid;
-					//System.out.println("Your Total Sickle(s) Payment Amount is: "+ sicklesPaid);
-					
-
-				//	paid = false;
+				
 					break;
 				case 3:
 					System.out.println("Enter Galleon(s) Amount: ");
@@ -280,38 +321,56 @@ public class assig1methods
 
 					galleonsPaid+=galleonPaymentAmount;
 
-
 					int galleonknutsPaid=0;
 					// convert galleons to knuts
 					galleonknutsPaid = galleonPaymentAmount*493;
 
 					totalPaid+=galleonknutsPaid;
-					//System.out.println("Your Total Galleon(s) Payment Amount is: "+ galleonsPaid);
-
-
-				//	paid = false;
 					break;
 			}
 
 			System.out.println("Total Due (in Knuts): " + customerTotal);
 			System.out.println("Total Paid (in Knuts): " + totalPaid);
 
+///	give proper change with min coins
+
 			if(customerTotal<=totalPaid){
 				if (totalPaid>customerTotal){
 					int change = 0;
 					change = totalPaid - customerTotal;	
-					System.out.println("Your change is " + change + " in Knuts");
-					
-					// convert to sickles and galleons//
-					// display in order, galleons are highest and should be checked first
-					// if change / 493
-					// then galleon
-					//	change = (change - (493*galleon))
-					// else if change /  
+					System.out.println("Your change is " + change + " in Knuts or:");
 
-					//int subSickles = 0;
-					//int subGalleon = 0;
-					//System.out.println("or" + change + " in Knuts");
+					if(change>=493){
+						galleonChange = change/493;
+						change = change - (galleonChange*493);
+						if(change>=29){
+							sickleChange = change/29;
+							change = change - (sickleChange*29);
+						}
+					}
+					else if(change>=29){
+						sickleChange = change/29;
+						change = change - (sickleChange*29);
+					}
+
+
+					System.out.println("Galleon(s): " + galleonChange);
+					System.out.println("Sickle(s): " + sickleChange);
+					System.out.println("Knut(s): " + change);	
+
+					// should only print if there are values... not working correctly
+//					System.out.println("Your change is:");
+//					if(galleonChange>0){
+//						System.out.println(galleonChange + ": Galleon(s)");	
+//					}
+//					else if(sickleChange>0){
+//						System.out.println(sickleChange + ": Sickle(s)");	
+//					}
+//					else{
+//						System.out.println(change + ": Knut(s)");	
+//					}
+					
+
 
 				}
 				paid = true;
@@ -326,8 +385,7 @@ public class assig1methods
 			else if (customerTotal>totalPaid) {
 				paid = false;
 			}
-
-
+		
 			//System.out.println("Total Knut(s) Paid: " + knutsPaid);
 			//System.out.println("Total Sickle(s) Paid: " + sicklesPaid);
 			//System.out.println("Total Galleon(s) Paid: " + galleonsPaid);
@@ -387,7 +445,7 @@ public class assig1methods
 		// and set to variable ready2go with boolean result 
 
 		ready2go = customerReady(customerQuestion);
-		System.out.println(ready2go);
+		//System.out.println(ready2go);
 
 
 
@@ -439,37 +497,6 @@ public class assig1methods
 
 		return;
 
-
-
-
-
-		// print receipt/ displayTotal
-
-
-
-		//deleteData();
-
-		// if 5 is pressed currently exits... but needs to be included in 
-		// larger loop that checks for customer first 
-
-
-
-
-
-	
-	//String menu;
-
-	// should run method with argument special true/false that returns proper prices
-	//menu = priceList(special);
-
-	// and display the menu
-	
-	//int choice = inScan.nextInt();
-	//int menu = mainMenu(choice);
-	//System.out.println(mainMenu(choice));
-	//System.out.println(menu);
-
-//	System.out.println()
 
 
 ////////////////
@@ -533,33 +560,6 @@ public class assig1methods
 		return ready;
 
 	}
-//		if (!ready){
-//			ready = false;
-//		}
-
-
-
-		// now we check if customer is ready
-//		if (ready){
-				//this was a check to make sure it is working properly
-//				System.out.println("We almost made it outside the first check!");
-//			}
-//		else{
-
-			// If the customerReady = false then we exit the program
-			// this means the response given in the previous for loop
-			// was not found in the validresponse list
-			// *** note: add time delay so if no response is given within certain amount of time exit
-		//	System.out.println("I'm going on my break ;)");
-			
-//			ready = false;
-//		}
-	
-		// this checked that the valid response was given and we did not exit the program
-	//	System.out.println("We made it outside the first check!");
-
-//		return ready;
-//	}
 
 /////////////////////////////////////////////////////////////////////////	
 /////////////////////////////////////////////////////////////////////////
@@ -688,7 +688,7 @@ public class assig1methods
 					break;
 				case 5:
 					System.out.println("Back to Main Menu!");
-					displayTotal(special);
+					//displayTotal(special);
 
 					break;
 			}
@@ -754,6 +754,8 @@ public class assig1methods
 
 		} while (menuChoice != 2);
 
+		System.out.println("Back to Main Menu!");
+
 		return menuCategory;
 	}
 
@@ -807,6 +809,7 @@ public static int updateBroomstick(boolean special){
 			}
 
 		} while (menuChoice != 2);
+		System.out.println("Back to Main Menu!");
 
 		return menuCategory;
 	}
@@ -897,52 +900,10 @@ public static int updateBroomstick(boolean special){
 	}
 
 
-
+	System.out.println("Back to Main Menu!");
 
 		//return menuCategory;
 	}
-
-
-
-
-/// methods to do list
-// will have to write a method for reading from test.txt for calculating totals
-// displaying current totals, and for 'printing receipt'
-
-
-
-// should only need to pass isSpecial in
-//runningTotal(isSpecial)
-	//if special = true;
-	//	return savings
-	//else 
-		//return whatYouWouldHaveSaved
-
-//grab test.txt and covnvert to readable 
-//	coverter needed to take values from txt and put back into
-
-
-// no matter if true or false, it'll gt passed 
-// and return if the customer gets discount or not
-//finalBill(isSpecial)
-
-
-
-// payBill - something that after reading finalBill allows you to pay
-
-
-// savings for being special or vice versa, what you could have saved if not special
-
-
-// methods wish list
-
-// delete records (customer)
-	// prob don't need this because records are entered individually to a mster
-	// and if deleted, maybe give them a tag of some sort to keep track?? 
-
-
-
-
 
 
 //////////// ********************************************** //////////////
@@ -1066,9 +1027,17 @@ public static int updateBroomstick(boolean special){
 
 	public static int displayTotal(boolean special){
 
-		
 	int totalBill = 0;
-		//String fileLocation = "customerBill.txt";
+
+//	check to make sure file exists first
+// case that no one buys anything - return totalBill is 0	
+	File tmpDir = new File("customerBill.txt");
+	boolean exists = tmpDir.exists();
+
+	if(!exists){
+		return totalBill = 0;
+	}
+
 
 	try{
 		FileReader fr = new FileReader("customerBill.txt");
@@ -1111,6 +1080,8 @@ public static int updateBroomstick(boolean special){
 
 
 		//int totalBill = 0;
+
+
 
 		while ((line = br.readLine()) != null){
 ////////////////////////////////////////////////////////////////////////////////////			
@@ -1329,7 +1300,7 @@ public static int updateBroomstick(boolean special){
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-			System.out.println("-----   Total Bill Due: " + totalBill + "   -----");
+			System.out.println("-----   Total Bill Due: " + totalBill + " Knuts  -----");
 			
 			System.out.println("*******************************************");
 
@@ -1543,17 +1514,51 @@ public static String convertOrderAmount(String line){
 	
 
 
+/// methods to do list
+// will have to write a method for reading from test.txt for calculating totals
+// displaying current totals, and for 'printing receipt'
+
+
+
+// should only need to pass isSpecial in
+//runningTotal(isSpecial)
+	//if special = true;
+	//	return savings
+	//else 
+		//return whatYouWouldHaveSaved
+
+//grab test.txt and covnvert to readable 
+//	coverter needed to take values from txt and put back into
+
+
+// no matter if true or false, it'll gt passed 
+// and return if the customer gets discount or not
+//finalBill(isSpecial)
+
+
+
+// payBill - something that after reading finalBill allows you to pay
+
+
+// savings for being special or vice versa, what you could have saved if not special
+
+
+// methods wish list
+
+// delete records (customer)
+	// prob don't need this because records are entered individually to a mster
+	// and if deleted, maybe give them a tag of some sort to keep track?? 
 
 
 
 //////////// major problems/ known errors
 
-// include change that is broken down by galleon sickle and knut
+// 10% discount for any orders over 3 galleons!!!!
+
 
 
 /////////// next steps
 
+// if nothing is ordered, it should skip asking for payment and move on to next customer
 
-
-
-
+// 10% discount for any orders over 3 galleons!!!!
